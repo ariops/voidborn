@@ -23,7 +23,9 @@ select,input{width:100%;background:#0f141d;color:var(--text);border:1px solid va
 <body>
 <div class="wrap">
 <section class="hero">
-<div class="card"><h1>Voidborn Loot History</h1><p class="notice">O site lê automaticamente o ficheiro <strong>voidbornloot.csv</strong> no mesmo repositório.</p><p class="notice" id="status">A carregar dados...</p></div>
+<div class="card"><h1>Voidborn Loot History</h1>
+<p class="notice">Porque alguém tem de se lembrar de quem ficou com o trinket.</p>
+<p class="notice" id="status" aria-live="polite"></p></div>
 <div class="stats" id="stats"></div>
 </section>
 <section class="layout">
@@ -140,8 +142,7 @@ function prepareData(rows){
   fillSelect('instance', [...new Set(items.map(r => r.Raid).filter(Boolean))].sort((a,b)=>a.localeCompare(b)));
   fillSelect('category', categories);
   render();
-  document.getElementById('status').innerHTML = `<span class="good">Dados carregados com sucesso.</span> Atualiza apenas o ficheiro <strong>voidbornloot.csv</strong> para renovar o site.`;
-}
+  document.getElementById('status').textContent = '';
 
 function loadCsv(){
   Papa.parse('voidbornloot.csv', {
